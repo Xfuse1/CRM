@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const whatsapp_controller_1 = require("../controllers/whatsapp.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const router = (0, express_1.Router)();
+const controller = new whatsapp_controller_1.WhatsAppController();
+router.use(auth_middleware_1.authMiddleware);
+router.post('/session', controller.createSession.bind(controller));
+router.get('/status', controller.getStatus.bind(controller));
+exports.default = router;
